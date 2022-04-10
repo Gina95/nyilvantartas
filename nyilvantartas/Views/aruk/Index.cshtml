@@ -1,0 +1,67 @@
+﻿@model nyilvantartas.Models.AruViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="aruk" asp-action="Index" class="mb-5">
+
+    <select asp-for="keresTipus" asp-items="Model.Tipus">
+        <option value="">Összes</option>
+    </select>
+    <label for="floatingSelect"> </label>
+
+    Elnevezés: <input asp-for="keresMegnevezes" type="text" >
+    <label for="floatingSelect"> </label>
+
+    <button type="submit" class="btn btn-primary">Keres</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nyilvantartas[0].Megnevezes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nyilvantartas[0].Gyarto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nyilvantartas[0].Tipus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nyilvantartas[0].BeszerzesiAr)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.nyilvantartas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Megnevezes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gyarto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BeszerzesiAr)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
